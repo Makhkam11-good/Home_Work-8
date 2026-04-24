@@ -1,6 +1,7 @@
 package com.narxoz.rpg.combatant;
 
 import com.narxoz.rpg.state.HeroState;
+import com.narxoz.rpg.state.BerserkState;
 import com.narxoz.rpg.state.NormalState;
 
 /**
@@ -40,7 +41,11 @@ public class Hero {
         if (state == null) {
             throw new IllegalArgumentException("state cannot be null");
         }
+        String previous = this.state == null ? "None" : this.state.getName();
         this.state = state;
+        if (!previous.equals(this.state.getName())) {
+            System.out.println(name + " state: " + previous + " -> " + this.state.getName());
+        }
     }
 
     public void onTurnStart() {
@@ -68,6 +73,11 @@ public class Hero {
         int reduced = Math.max(0, amount - defense);
         int modified = Math.max(0, state.modifyIncomingDamage(reduced));
         hp = Math.max(0, hp - modified);
+        if (isAlive()
+                && hp <= Math.max(1, maxHp / 3)
+                && !(state instanceof BerserkState)) {
+            setState(new BerserkState());
+        }
     }
 
     /**

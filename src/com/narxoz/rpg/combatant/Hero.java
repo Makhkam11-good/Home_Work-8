@@ -1,7 +1,7 @@
 package com.narxoz.rpg.combatant;
 
-import com.narxoz.rpg.state.HeroState;
 import com.narxoz.rpg.state.BerserkState;
+import com.narxoz.rpg.state.HeroState;
 import com.narxoz.rpg.state.NormalState;
 
 /**

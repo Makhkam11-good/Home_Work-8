@@ -1,6 +1,7 @@
 package com.narxoz.rpg.combatant;
 
 import com.narxoz.rpg.state.HeroState;
+import com.narxoz.rpg.state.NormalState;
 
 /**
  * Represents a player-controlled hero participating in the tower climb.
@@ -9,36 +10,6 @@ import com.narxoz.rpg.state.HeroState;
  * You will need to add a HeroState field and related methods.
  */
 public class Hero {
-
-    private static final HeroState DEFAULT_STATE = new HeroState() {
-        @Override
-        public String getName() {
-            return "Normal";
-        }
-
-        @Override
-        public int modifyOutgoingDamage(int basePower) {
-            return basePower;
-        }
-
-        @Override
-        public int modifyIncomingDamage(int rawDamage) {
-            return rawDamage;
-        }
-
-        @Override
-        public void onTurnStart(Hero hero) {
-        }
-
-        @Override
-        public void onTurnEnd(Hero hero) {
-        }
-
-        @Override
-        public boolean canAct() {
-            return true;
-        }
-    };
 
     private final String name;
     private int hp;
@@ -53,7 +24,7 @@ public class Hero {
         this.maxHp = hp;
         this.attackPower = attackPower;
         this.defense = defense;
-        this.state = DEFAULT_STATE;
+        this.state = new NormalState();
     }
 
     public String getName()        { return name; }
